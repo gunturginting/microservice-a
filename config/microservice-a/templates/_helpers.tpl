@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "config.name" -}}
+{{- define "microservice-a.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "config.fullname" -}}
+{{- define "microservice-a.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "config.chart" -}}
+{{- define "microservice-a.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "config.labels" -}}
-helm.sh/chart: {{ include "config.chart" . }}
-{{ include "config.selectorLabels" . }}
+{{- define "microservice-a.labels" -}}
+helm.sh/chart: {{ include "microservice-a.chart" . }}
+{{ include "microservice-a.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "config.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "config.name" . }}
+{{- define "microservice-a.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "microservice-a.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "config.serviceAccountName" -}}
+{{- define "microservice-a.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "config.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "microservice-a.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
