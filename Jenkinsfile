@@ -8,7 +8,7 @@ pipeline {
         REPO_CODE = "https://github.com/gunturginting/microservice-a.git"
         REPO_SECRET = "github-jenkins"
         IMAGE_REPO = "aey16/${APP_NAME}"
-        NAMESPACE = "skripsi"
+        NAMESPACE = "application"
     }
     agent any
 
