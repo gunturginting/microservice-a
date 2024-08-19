@@ -49,10 +49,7 @@ pipeline {
         
         stage('Clean') {
             steps {
-                script {
-                    sh "docker image prune -f"
-                    sh "rm ~/.kube/config"
-                }
+                cleanWs()
             }
         }
     }
